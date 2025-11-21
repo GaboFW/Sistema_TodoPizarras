@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1001,
+        "name": "Smart TV 50\" 4K Samsung UHD",
+        "handle": "smart-tv-50-4k-samsung-uhd",
+        "published": true,
+        "images": [
+            {
+                "id": 2001,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img1.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3001,
+                "price": "1500000.00",
+                "stock": 50,
+                "sku": "SAM-TV50-4K"
+            }
+        ]
+    },
+    {
+        "id": 1002,
+        "name": "Notebook Gamer Lenovo Legion 5",
+        "handle": "notebook-gamer-lenovo-legion-5",
+        "published": true,
+        "images": [
+            {
+                "id": 2002,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img2.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3002,
+                "price": "2800000.00",
+                "stock": 15,
+                "sku": "LEN-LEGION5-GM"
+            }
+        ]
+    },
+    {
+        "id": 1003,
+        "name": "Celular iPhone 15 Pro Max 256GB - Titanio",
+        "handle": "iphone-15-pro-max-256gb-titanio",
+        "published": true,
+        "images": [
+            {
+                "id": 2003,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img3.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3003,
+                "price": "3500000.00",
+                "stock": 30,
+                "sku": "APL-IP15-PM-256"
+            }
+        ]
+    },
+    {
+        "id": 1004,
+        "name": "Auriculares Bluetooth Sony WH-1000XM5 Negros",
+        "handle": "sony-wh-1000xm5-negros",
+        "published": true,
+        "images": [
+            {
+                "id": 2004,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img4.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3004,
+                "price": "750000.00",
+                "stock": 100,
+                "sku": "SONY-WHXM5-BK"
+            }
+        ]
+    },
+    {
+        "id": 1005,
+        "name": "Cafetera Nespresso Vertuo Next Blanca",
+        "handle": "cafetera-nespresso-vertuo-next-blanca",
+        "published": true,
+        "images": [
+            {
+                "id": 2005,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img5.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3005,
+                "price": "450000.00",
+                "stock": 80,
+                "sku": "NES-VERTUO-WH"
+            }
+        ]
+    },
+    {
+        "id": 1006,
+        "name": "Zapatillas Running Nike Pegasus 40 Hombre",
+        "handle": "zapatillas-nike-pegasus-40-hombre",
+        "published": true,
+        "images": [
+            {
+                "id": 2006,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img6.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3006,
+                "price": "310000.00",
+                "stock": 200,
+                "sku": "NIK-PEG40-M"
+            }
+        ]
+    },
+    {
+        "id": 1007,
+        "name": "Silla de Oficina Ergonómica Malla Premium",
+        "handle": "silla-oficina-ergonomica-premium",
+        "published": true,
+        "images": [
+            {
+                "id": 2007,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img7.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3007,
+                "price": "280000.00",
+                "stock": 60,
+                "sku": "CHAIR-ERGO-PRM"
+            }
+        ]
+    },
+    {
+        "id": 1008,
+        "name": "Taladro Percutor Inalámbrico 18V Bosch",
+        "handle": "taladro-percutor-bosch-18v",
+        "published": true,
+        "images": [
+            {
+                "id": 2008,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img8.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3008,
+                "price": "420000.00",
+                "stock": 40,
+                "sku": "BOSCH-TP-18V"
+            }
+        ]
+    },
+    {
+        "id": 1009,
+        "name": "Bicicleta Mountain Bike R29 Shimano",
+        "handle": "bicicleta-mtb-r29-shimano",
+        "published": true,
+        "images": [
+            {
+                "id": 2009,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img9.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3009,
+                "price": "950000.00",
+                "stock": 25,
+                "sku": "MTB-R29-SHI"
+            }
+        ]
+    },
+    {
+        "id": 1010,
+        "name": "Robot Aspiradora Inteligente Gadnic",
+        "handle": "robot-aspiradora-gadnic",
+        "published": true,
+        "images": [
+            {
+                "id": 2010,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img10.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3010,
+                "price": "550000.00",
+                "stock": 35,
+                "sku": "GAD-ROBOT-V1"
+            }
+        ]
+    },
+    {
+        "id": 1011,
+        "name": "Monitor Gamer 27\" 144Hz ASUS VG27",
+        "handle": "monitor-gamer-27-144hz-asus-vg27",
+        "published": true,
+        "images": [
+            {
+                "id": 2011,
+                "src": "https://cdn.tiendanube.com/stores/123/products/img11.jpg"
+            }
+        ],
+        "variants": [
+            {
+                "id": 3011,
+                "price": "1300000.00",
+                "stock": 45,
+                "sku": "ASUS-VG27-144"
+            }
+        ]
+    }
+]

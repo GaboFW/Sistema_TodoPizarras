@@ -1,0 +1,131 @@
+{
+    "site_id": "MLA",
+    "query": "smart tv",
+    "paging": {
+        "total": 10,
+        "offset": 0,
+        "limit": 10
+    },
+    "results": [
+        {
+            "id": "MLA12345678",
+            "title": "Smart TV 50\" 4K Samsung UHD",
+            "price": 1500000.00,
+            "currency_id": "ARS",
+            "available_quantity": 50,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_1.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345679",
+            "title": "Notebook Gamer Lenovo Legion 5",
+            "price": 2800000.00,
+            "currency_id": "ARS",
+            "available_quantity": 15,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_2.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345680",
+            "title": "Celular iPhone 15 Pro Max 256GB - Titanio",
+            "price": 3500000.00,
+            "currency_id": "ARS",
+            "available_quantity": 30,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_3.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345681",
+            "title": "Auriculares Bluetooth Sony WH-1000XM5 Negros",
+            "price": 750000.00,
+            "currency_id": "ARS",
+            "available_quantity": 100,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_4.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345682",
+            "title": "Cafetera Nespresso Vertuo Next Blanca",
+            "price": 450000.00,
+            "currency_id": "ARS",
+            "available_quantity": 80,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_5.jpg",
+            "shipping": {
+                "free_shipping": false
+            }
+        },
+        {
+            "id": "MLA12345683",
+            "title": "Zapatillas Running Nike Pegasus 40 Hombre",
+            "price": 310000.00,
+            "currency_id": "ARS",
+            "available_quantity": 200,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_6.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345684",
+            "title": "Silla de Oficina Ergonómica Malla Premium",
+            "price": 280000.00,
+            "currency_id": "ARS",
+            "available_quantity": 60,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_7.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345685",
+            "title": "Taladro Percutor Inalámbrico 18V Bosch",
+            "price": 420000.00,
+            "currency_id": "ARS",
+            "available_quantity": 40,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_8.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345686",
+            "title": "Bicicleta Mountain Bike R29 Shimano",
+            "price": 950000.00,
+            "currency_id": "ARS",
+            "available_quantity": 25,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_9.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        },
+        {
+            "id": "MLA12345687",
+            "title": "Robot Aspiradora Inteligente Gadnic",
+            "price": 550000.00,
+            "currency_id": "ARS",
+            "available_quantity": 35,
+            "condition": "new",
+            "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_10.jpg",
+            "shipping": {
+                "free_shipping": true
+            }
+        }
+    ]
+}
