@@ -28,8 +28,8 @@ function crearFilas(nombre, cantidad) {
 
 mostrarSpinner();
 
-const uriML = "./simulacionML.json";
-const uriTN = "./simulacionTN.json";
+const uriML = "http://localhost:3000/mercadolibre";
+const uriTN = "http://localhost:3000/tiendanube";
 
 const ml = fetch(uriML)
     .then(response => { return response.json() })
@@ -41,7 +41,7 @@ const tn = fetch(uriTN)
 
 Promise.all([ml, tn])
     .then(([dataML, dataTN]) => {
-        const infoML = dataML.results;
+        const infoML = dataML.body;
         const infoTN = dataTN;
 
         const inventario = {};
@@ -59,12 +59,13 @@ Promise.all([ml, tn])
 
         infoTN.forEach(item => {
             const nombre = item.name?.es;
+            const nombreCapitalizado = nombre.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
             const cantidad = item.variants[0].stock;
 
-            if (!inventario[nombre]) {
-                inventario[nombre] = cantidad;
+            if (!inventario[nombreCapitalizado]) {
+                inventario[nombreCapitalizado] = cantidad;
             } else {
-                inventario[nombre] += cantidad;
+                inventario[nombreCapitalizado] += cantidad;
             }
         });
 
