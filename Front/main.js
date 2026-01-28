@@ -1,5 +1,6 @@
 const tbody = document.getElementById("tbodyTable");
 const spinner = document.getElementById("spinner");
+const inputBuscador = document.getElementById("buscador");
 
 function mostrarSpinner() {
     spinner.parentNode.style.display = "flex";
@@ -9,27 +10,35 @@ function ocultarSpinner() {
     spinner.parentNode.style.display = "none";
 }
 
-function crearFilas(nombre, cantidad) {
-    const tr = document.createElement("tr");
+function crearFilas(productos) {
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
 
-    const thNombre = document.createElement("th");
-    thNombre.textContent = nombre;
+    productos.forEach(item => {
+        const tr = document.createElement("tr");
 
-    const thCantidad = document.createElement("th");
-    thCantidad.textContent = cantidad;
+        const thNombre = document.createElement("th");
+        thNombre.textContent = item.nombre;
 
-    tr.appendChild(thNombre);
-    tr.appendChild(thCantidad);
+        const thCantidad = document.createElement("th");
+        thCantidad.textContent = item.cantidad;
 
-    tbody.appendChild(tr);
+        const thPlataforma = document.createElement("th");
+        thPlataforma.textContent = item.plataforma;
 
-    return tr;
+        tr.appendChild(thNombre);
+        tr.appendChild(thCantidad);
+        tr.appendChild(thPlataforma);
+
+        tbody.appendChild(tr);
+    });
 }
 
 mostrarSpinner();
 
-const uriML = "http://localhost:3000/mercadolibre";
-const uriTN = "http://localhost:3000/tiendanube";
+const uriML = "https://back-jlji.onrender.com/mercadolibre";
+const uriTN = "https://back-jlji.onrender.com/tiendanube";
 
 const ml = fetch(uriML)
     .then(response => { return response.json() })
@@ -39,39 +48,35 @@ const tn = fetch(uriTN)
     .then(response => { return response.json() })
     .catch((error) => console.error(error));
 
+let allProductos = [];
+
 Promise.all([ml, tn])
     .then(([dataML, dataTN]) => {
-        const infoML = dataML.body;
-        const infoTN = dataTN;
+        const infoML = dataML.body.map(item => ({
+            nombre: item.title,
+            cantidad: item.available_quantity,
+            plataforma: "ML"
+        }));
 
-        const inventario = {};
+        const infoTN = dataTN.map(item => ({
+            nombre: (item.name?.es).replace(/(^\w|\s\w)/g, m => m.toUpperCase()),
+            cantidad: item.variants[0].stock,
+            plataforma: "TN"
+        }));
 
-        infoML.forEach(item => {
-            const nombre = item.title;
-            const cantidad = item.available_quantity;
+        allProductos = [...infoML, ...infoTN];
 
-            if (!inventario[nombre]) {
-                inventario[nombre] = cantidad;
-            } else {
-                inventario[nombre] += cantidad;
-            }
-        });
-
-        infoTN.forEach(item => {
-            const nombre = item.name?.es;
-            const nombreCapitalizado = nombre.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
-            const cantidad = item.variants[0].stock;
-
-            if (!inventario[nombreCapitalizado]) {
-                inventario[nombreCapitalizado] = cantidad;
-            } else {
-                inventario[nombreCapitalizado] += cantidad;
-            }
-        });
-
-        Object.entries(inventario).forEach(([nombre, cantidad]) => {
-            crearFilas(nombre, cantidad);
-        });
+        crearFilas(allProductos);
     })
     .catch((error) => console.error(error))
     .finally(() => { ocultarSpinner() });
+
+inputBuscador.addEventListener("input", (e) => {
+    const textoUsuario = e.target.value.toLowerCase();
+
+    const productosFiltrados = allProductos.filter(producto => {
+        return producto.nombre.toLowerCase().includes(textoUsuario);
+    });
+
+    crearFilas(productosFiltrados);
+});
