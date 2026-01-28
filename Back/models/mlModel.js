@@ -1,9 +1,5 @@
 require("dotenv").config();
-const { obtenerTokenValido } = require("../models/tokenModel");
 
-/**
- * Los productos con sus IDs
- */
 const getIdsML = async (accessToken) => {
     let items = [];
     let scrollId = null;
@@ -11,7 +7,7 @@ const getIdsML = async (accessToken) => {
 
     try {
         while (hasMore) {
-            let url = `${process.env.ML_API_URI}/users/${process.env.ML_USER_ID}/items/search?search_type=scan&limit=100`;
+            let url = `${process.env.ML_API_URL}/users/${process.env.ML_USER_ID}/items/search?search_type=scan`;
 
             if (scrollId) {
                 url += `&scroll_id=${scrollId}`;
@@ -37,7 +33,6 @@ const getIdsML = async (accessToken) => {
         }
 
         return items;
-
     } catch (error) {
         return { status: 500, body: { error: "Error interno obteniendo token" } };
     }

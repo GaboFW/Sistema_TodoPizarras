@@ -8,36 +8,37 @@ const getTokenML = async (req, res) => {
         let tokenData = await getToken();
 
         if (!tokenData) {
-            const initialResponse = await MLToken();
+            const tokenInicial = await MLToken();
 
-            if (initialResponse.status === 200) {
-                return res.status(200).json(initialResponse.body);
+            if (tokenInicial.status === 200) {
+                return res.status(200).json(tokenInicial.body);
             } else {
-                return res.status(initialResponse.status).json(initialResponse.body);
+                return res.status(tokenInicial.status).json(tokenInicial.body);
             }
-        }
 
-        const isExpired = !tokenData.expires_at || Date.now() > tokenData.expires_at;
+            const isExpired = !tokenData.expires_at || Date.now() > tokenData.expires_at;
 
-        if (isExpired) {
-            const refreshResponse = await MLRefreshToken();
+            if (isExpired) {
+                const refreshToken = await MLRefreshToken();
 
-            if (refreshResponse.status === 200) {
-                return res.status(200).json(refreshResponse.body);
-            }
-            else {
-                return res.status(refreshResponse.status).json(refreshResponse.body);
+                if (refreshToken.status === 200) {
+                    return res.status(200).json(refreshToken.body);
+                } else {
+                    return res.status(refreshToken.status).json(refreshToken.body);
+                }
             }
         }
 
         return res.status(200).json(tokenData);
     }
     catch (error) {
-        console.error("Controller error:", error);
-        res.status(500).json({ error: "Error interno obteniendo token" });
+        res.status(500).json({
+            error: "Error en la obtención del token",
+            message: error.message
+        });
     }
 }
 
 module.exports = {
-    getTokenML,
+    getTokenML
 };
