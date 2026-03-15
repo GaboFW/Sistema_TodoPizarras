@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 const getIdsML = async (accessToken) => {
     let items = [];

@@ -1,5 +1,5 @@
-require("dotenv").config();
-const { obtenerTokenValido } = require("../models/tokenModel");
+// require("dotenv").config();
+const { tokenValido } = require("../models/tokenModel");
 const { getIdsML } = require("../models/mlModel");
 
 // Tienda Nube
@@ -38,7 +38,7 @@ const chunkArray = (array, size) => {
 
 const getStockML = async (req, res) => {
     try {
-        const accessToken = await obtenerTokenValido();
+        const accessToken = await tokenValido();
 
         const ids = await getIdsML(accessToken);
 

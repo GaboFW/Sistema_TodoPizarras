@@ -1,106 +1,79 @@
-require("dotenv").config();
-const { guardarToken, getToken } = require("../utils/tokenRedis");
+// require("dotenv").config();
+const { guardarToken, obtenerToken } = require("../utils/authKV");
 
-const MLToken = async () => {
-    const bodyParams = new URLSearchParams();
-    bodyParams.append("grant_type", "authorization_code");
-    bodyParams.append("client_id", `${process.env.ML_APP_ID}`);
-    bodyParams.append("client_secret", `${process.env.ML_SECRET_KEY}`);
-    bodyParams.append("code", `${process.env.ML_CODE}`);
-    bodyParams.append("redirect_uri", `${process.env.ML_REDIRECT_URI}`);
+const token = async () => {
+    const bodyParams = new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: process.env.ML_APP_ID,
+        client_secret: process.env.ML_SECRET_KEY,
+        code: process.env.ML_CODE,
+        redirect_uri: process.env.ML_REDIRECT_URI
+    });
 
-    try {
-        const response = await fetch(`${process.env.ML_URI_TOKEN}`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: bodyParams.toString()
-        })
+    const response = await fetch(process.env.ML_URI_TOKEN, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: bodyParams.toString()
+    })
 
-        const data = await response.json();
+    const data = await response.json();
 
-        if (!response.ok) {
-            return { status: response.status, body: data };
-        }
-
-        await guardarToken(data);
-
-        return { status: 200, body: data };
-    } catch (error) {
-        throw error;
+    if (!response.ok) {
+        return { status: response.status, body: data };
     }
+
+    return await guardarToken(data);
+};
+
+const renovarToken = async (refresh_token) => {
+    const bodyParams = new URLSearchParams({
+        grant_type: "refresh_token",
+        client_id: `${process.env.ML_APP_ID}`,
+        client_secret: `${process.env.ML_SECRET_KEY}`,
+        refresh_token: `${refresh_token}`
+    });
+
+    const response = await fetch(process.env.ML_URI_TOKEN, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: bodyParams.toString()
+    })
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        return { status: response.status, body: data };
+    }
+
+    return await guardarToken(data);
 }
 
-const MLRefreshToken = async () => {
-    const dataJson = await getToken();
+const tokenValido = async () => {
+    const datosJson = await obtenerToken();
+    const ahora = Date.now();
 
-    if (!dataJson) {
-        throw new Error("No se encontraron datos en Redis");
+    if (datosJson && datosJson.access_token && ahora < datosJson.expires_at) {
+        return datosJson;
     }
 
-    const bodyParams = new URLSearchParams();
-    bodyParams.append("grant_type", "refresh_token");
-    bodyParams.append("client_id", `${process.env.ML_APP_ID}`);
-    bodyParams.append("client_secret", `${process.env.ML_SECRET_KEY}`);
-    bodyParams.append("refresh_token", `${dataJson.refresh_token}`);
-
-    try {
-        const response = await fetch(`${process.env.ML_URI_TOKEN}`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: bodyParams.toString()
-        })
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            return { status: response.status, body: data };
+    if (datosJson && datosJson.refresh_token) {
+        try {
+            return await renovarToken(datosJson.refresh_token);
         }
-
-        await guardarToken(data);
-
-        return { status: 200, body: data };
-
-    } catch (error) {
-        throw error;
-    }
-}
-
-const obtenerTokenValido = async () => {
-    let tokenData = await getToken();
-
-    if (!tokenData) {
-        const tokenInicial = await MLToken();
-
-        if (tokenInicial.status === 200) {
-            return tokenInicial.body.acces_token;
-        } else {
-            throw new Error(`No hay token almacenado y fallo el login inicial: ${JSON.stringify(tokenInicial.body)}`);
+        catch (error) {
+            throw new Error("Error al obtener el token", error);
         }
     }
 
-    const isExpired = !tokenData.expires_at || Date.now() > tokenData.expires_at;
-
-    if (isExpired) {
-        const refreshToken = await MLRefreshToken();
-
-        if (refreshToken.status === 200) {
-            return refreshToken.body.access_token;
-        } else {
-            throw new Error(`No se pudo refrescar el token: ${JSON.stringify(refreshToken.body)}`);
-        }
-    }
-
-    return tokenData.access_token;
+    return await token();
 }
 
 module.exports = {
-    MLToken,
-    MLRefreshToken,
-    obtenerTokenValido
+    tokenValido
 };

@@ -1,4 +1,4 @@
-const { getTiendaNube, getStockML } = require("../controllers/dataController");
+const { getTiendaNube, getStockML } = require("../controller/dataController");
 
 const express = require("express");
 const router = express.Router();
